@@ -9,8 +9,13 @@ class DiGraph(GraphInterface):
         self.__MC = 0
         self.__edge_size = 0
 
-    def copy(self):
-        pass
+    def copy(self, other):
+        if isinstance(other, GraphInterface):
+            for node in other.get_all_v().keys():
+                self.add_node(node)
+            for node in other.get_all_v().keys():
+                for edges in other.all_out_edges_of_node(node).items():
+                    self.add_edge(node, edges[0], edges[1])
 
     def v_size(self) -> int:
         return len(self.__Nodes)
