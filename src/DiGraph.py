@@ -49,7 +49,7 @@ class DiGraph(GraphInterface):
     def remove_node(self, node_id: int) -> bool:
         if node_id not in self.N.keys():
             return False
-        for key in self.RE.keys():
+        for key in self.RE[node_id].keys():
             self.E[key].pop(node_id)
             self.edge_size -= 1
             self.MC += 1
@@ -77,4 +77,4 @@ class DiGraph(GraphInterface):
     def all_out_edges_of_node(self, id1: int) -> dict:
         return self.E[id1]
 
-    
+
