@@ -5,7 +5,7 @@ class node_data:
         self._key = key
         self._tag = tag = 0
         self._weight = 0
-        self.__pos = (0, 0, 0)
+        self._pos = (0, 0, 0)
 
     def getkey(self) -> int:
         return self._key
@@ -24,6 +24,11 @@ class node_data:
 
     def setweight(self, weight):
         self._weight = weight
+
+    def setpos(self, x: float, y: float, z: float):
+        self._pos[0] = x
+        self._pos[1] = y
+        self._pos[2] = z
 
     def __repr__(self):
         return "node_data: { Key: " + str(self._key) + " }"
