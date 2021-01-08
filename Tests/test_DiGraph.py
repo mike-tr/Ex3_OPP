@@ -26,6 +26,6 @@ class TestDiGraph(TestCase):
         graph.add_edge(0, 10, 3)
         TestCase.assertEqual(self, 3, graph.E_size())
         graph.add_edge(0, 3, 2)
-        TestCase.assertEqual(self, )
+        TestCase.assertEqual(self, graph.getnode(3))
         TestCase.assertEqual(self, 1, graph.E_size())
 
