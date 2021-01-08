@@ -1,5 +1,5 @@
 from src.GraphInterface import GraphInterface
-from src.node_data import node_data
+from src.NodeData import NodeData
 
 
 class DiGraph(GraphInterface):
@@ -24,7 +24,7 @@ class DiGraph(GraphInterface):
                 return self._Edges[node1][node2]
         return -1
 
-    def get_node(self, key: int) -> node_data:
+    def get_node(self, key: int) -> NodeData:
         if key in self._Nodes:
             return self._Nodes[key]
 
@@ -56,7 +56,7 @@ class DiGraph(GraphInterface):
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
         if node_id in self._Nodes.keys():
             return False
-        self._Nodes[node_id] = node_data(node_id)
+        self._Nodes[node_id] = NodeData(node_id)
         self._Edges[node_id] = {}
         self._Backward_Edges[node_id] = {}
         self._MC += 1
