@@ -40,6 +40,7 @@ class GraphAlgo(GraphAlgoInterface):
     def get_graph(self) -> GraphInterface:
         return self.graph
 
+    # noinspection PyTypeChecker
     def shortest_path(self, id1: int, id2: int) -> (float, list):
         start: _DistNode = self.graph.get_node(id1)
         dest: _DistNode = self.graph.get_node(id2)
