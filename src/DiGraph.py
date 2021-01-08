@@ -38,6 +38,10 @@ class DiGraph(GraphInterface):
         return self._MC
 
     def add_edge(self, id1: int, id2: int, weight: float) -> bool:
+        if id1 == id2:
+            return False
+        if weight < 0:
+            return False
         if not (id1 in self._Nodes.keys() and id2 in self._Nodes.keys()):
             return False
         if id2 in self._Edges[id1].keys():
@@ -69,6 +73,7 @@ class DiGraph(GraphInterface):
             self._Edges[key].pop(node_id)
             self._edge_size -= 1
             self._MC += 1
+        self._edge_size -= len(self._Edges[node_id])
         self._Edges.pop(node_id)
         self._Backward_Edges.pop(node_id)
         self._Nodes.pop(node_id)
