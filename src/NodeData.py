@@ -1,4 +1,4 @@
-from src.utilities import Vector3
+from src.utilities.Vector3 import Vector3
 
 
 class NodeData:

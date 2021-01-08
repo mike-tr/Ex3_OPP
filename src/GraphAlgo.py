@@ -1,21 +1,23 @@
 from typing import List
 
-from src import GraphAlgoInterface
-from src import GraphInterface
-from src import DiGraph
+from src.GraphAlgoInterface import GraphAlgoInterface
+from src.GraphInterface import GraphInterface
+from src.DiGraph import DiGraph
 
 
 class GraphAlgo(GraphAlgoInterface):
 
-    def __init__(self, graph=None):
+    def __init__(self, graph: DiGraph):
         if graph is None:
             graph = DiGraph()
-        self.graph = graph
+        elif not isinstance(graph, DiGraph):
+            graph = DiGraph(graph)
 
     def get_graph(self) -> GraphInterface:
         return self.graph
 
     def shortest_path(self, id1: int, id2: int) -> (float, list):
+        first = self.graph
         pass
 
     def connected_component(self, id1: int) -> list:
