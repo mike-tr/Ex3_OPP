@@ -1,6 +1,7 @@
 from src.GraphInterface import GraphInterface
 from src.node_data import node_data
 
+
 class DiGraph(GraphInterface):
     def __init__(self):
         self._Nodes = {}
@@ -16,6 +17,9 @@ class DiGraph(GraphInterface):
             for node in other.get_all_v().keys():
                 for edges in other.all_out_edges_of_node(node).items():
                     self.add_edge(node, edges[0], edges[1])
+
+    def getnode(self, key: int) -> node_data:
+        return self._Nodes[key]
 
     def v_size(self) -> int:
         return len(self._Nodes)
@@ -83,7 +87,8 @@ class DiGraph(GraphInterface):
         return self._Edges[id1]
 
     def __str__(self):
-        return "DiGraph: { " + "Node size: " + str(len(self._Nodes)) + ", Edge size: " + str(self._edge_size) + ", MC: " + str(self._MC) + " }"
+        return "DiGraph: { " + "Node size: " + str(len(self._Nodes)) + ", Edge size: " + str(
+            self._edge_size) + ", MC: " + str(self._MC) + " }"
 
     def __eq__(self, other):
         if isinstance(other, GraphInterface):
