@@ -11,6 +11,9 @@ class TestGraphAlgo(unittest.TestCase):
 
         for i in range(9):
             graph.add_edge(i, i + 1, 1)
+
+        print(graph._Edges[0])
+        print(graph._Edges[0].items())
         g = GraphAlgo(graph)
 
         print(g.shortest_path(1, 2))
