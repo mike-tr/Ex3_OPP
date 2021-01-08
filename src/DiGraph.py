@@ -69,6 +69,7 @@ class DiGraph(GraphInterface):
             self._Edges[key].pop(node_id)
             self._edge_size -= 1
             self._MC += 1
+        self._edge_size -= len(self._Edges[node_id])
         self._Edges.pop(node_id)
         self._Backward_Edges.pop(node_id)
         self._Nodes.pop(node_id)
