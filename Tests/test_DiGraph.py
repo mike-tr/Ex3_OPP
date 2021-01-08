@@ -3,22 +3,22 @@ from src.DiGraph import DiGraph
 import random
 
 
-# def graph_gen(v_size: int, e_size: int) -> DiGraph:
-#     graph = DiGraph()
-#     for i in range(v_size):
-#         DiGraph.add_node(i)
-#     random.seed(42)
-#     a = random.randint(0, v_size)
-#     b = random.randint(0, v_size)
-#     w = random.uniform(0.1, 10)
-#     graph.add_edge(a, b, w)
-#     return graph
+def graph_gen(v_size: int, e_size: int) -> DiGraph:
+    graph = DiGraph()
+    for i in range(v_size):
+        graph.add_node(i)
+    random.seed(42)
+    a = random.randint(0, v_size)
+    b = random.randint(0, v_size)
+    w = random.uniform(0.1, 10)
+    graph.add_edge(a, b, w)
+    return graph
 
 
 class TestDiGraph(TestCase):
 
-    # def test_runtime(self):
-    #     graph = graph_gen(100000, 1000000)
+    def test_runtime(self):
+        graph = graph_gen(100000, 1000000)
 
     def test_add_nodes(self):
         graph = DiGraph()
@@ -78,6 +78,9 @@ class TestDiGraph(TestCase):
         graph.add_edge(0, 4, 3)
         graph.add_edge(0, 5, 3)
         TestCase.assertEqual(self, 5, graph.e_size())
+        graph.remove_node(0)
+        TestCase.assertEqual(self, 0, graph.e_size())
+        TestCase.assertEqual(self, 9, graph.v_size())
         graph.remove_node(0)
         TestCase.assertEqual(self, 0, graph.e_size())
         TestCase.assertEqual(self, 9, graph.v_size())
