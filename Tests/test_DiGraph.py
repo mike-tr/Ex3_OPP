@@ -18,7 +18,17 @@ def graph_gen(v_size: int, e_size: int) -> DiGraph:
 class TestDiGraph(TestCase):
 
     def test_runtime(self):
-        graph = graph_gen(100000, 1000000)
+        v = 1000000
+        e = v * 10
+        graph = graph_gen(v, e)
+
+    def test_copy(self):
+        v = 10000
+        e = v * 10
+        graph = graph_gen(v, e)
+        graph2 = DiGraph()
+        graph2.copy(graph)
+        TestCase.assertEqual(self, graph, graph2)
 
     def test_add_nodes(self):
         graph = DiGraph()
