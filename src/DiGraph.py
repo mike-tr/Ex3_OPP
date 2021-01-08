@@ -18,13 +18,13 @@ class DiGraph(GraphInterface):
                 for edges in other.all_out_edges_of_node(node).items():
                     self.add_edge(node, edges[0], edges[1])
 
-    def getedge(self, node1: int, node2: int) -> float:
+    def get_edge(self, node1: int, node2: int) -> float:
         if node1 in self._Nodes and node2 in self._Nodes:
             if node2 in self._Edges[node1]:
                 return self._Edges[node1][node2]
         return -1
 
-    def getnode(self, key: int) -> node_data:
+    def get_node(self, key: int) -> node_data:
         if key in self._Nodes:
             return self._Nodes[key]
 
