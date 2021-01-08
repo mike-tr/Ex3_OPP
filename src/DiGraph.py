@@ -38,6 +38,8 @@ class DiGraph(GraphInterface):
         return self._MC
 
     def add_edge(self, id1: int, id2: int, weight: float) -> bool:
+        if id1 == id2:
+            return False
         if not (id1 in self._Nodes.keys() and id2 in self._Nodes.keys()):
             return False
         if id2 in self._Edges[id1].keys():
