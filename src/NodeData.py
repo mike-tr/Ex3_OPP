@@ -1,6 +1,10 @@
+from src.utilities import Vector3
+
+
 class NodeData:
-    def __init__(self, key: int):
+    def __init__(self, key: int, pos: Vector3 = None):
         self._key = key
+        self.pos = pos
 
     def get_key(self) -> int:
         return self._key

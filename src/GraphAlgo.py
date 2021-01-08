@@ -1,8 +1,8 @@
 from typing import List
 
-from GraphAlgoInterface import GraphAlgoInterface
-from GraphInterface import GraphInterface
-from DiGraph import DiGraph
+from src import GraphAlgoInterface
+from src import GraphInterface
+from src import DiGraph
 
 
 class GraphAlgo(GraphAlgoInterface):
@@ -16,7 +16,6 @@ class GraphAlgo(GraphAlgoInterface):
         return self.graph
 
     def shortest_path(self, id1: int, id2: int) -> (float, list):
-
         pass
 
     def connected_component(self, id1: int) -> list:

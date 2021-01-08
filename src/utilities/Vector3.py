@@ -16,6 +16,9 @@ class Vector3:
     def distance(self, other):
         return (self - other).magnitude()
 
+    def normalize(self):
+        return self / self.magnitude()
+
     def __add__(self, other):
         return Vector3(self.x + other.x, self.y + other.y, self.z + other.z)
 
