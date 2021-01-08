@@ -2,9 +2,12 @@ from src.utilities.Vector3 import Vector3
 
 
 class NodeData:
-    def __init__(self, key: int, pos: Vector3 = None):
+    def __init__(self, key: int, pos: tuple = None):
         self._key = key
-        self.pos = pos
+        if pos is not None:
+            self.pos = Vector3(pos[0], pos[1], pos[2])
+        else:
+            self.pos = None
 
     def get_key(self) -> int:
         return self._key
