@@ -8,9 +8,12 @@ class TestGraphAlgo(unittest.TestCase):
         graph = DiGraph()
         for i in range(10):
             graph.add_node(i)
+
+        for i in range(9):
+            graph.add_edge(i, i + 1, 1)
         g = GraphAlgo(graph)
 
-        g.shortest_path(0, 5)
+        print(g.shortest_path(1, 2))
 
 
 if __name__ == '__main__':

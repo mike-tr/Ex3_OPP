@@ -32,6 +32,9 @@ class Heap:
         self.id = Heap.next_id
         Heap.next_id += 1
 
+    def in_heap(self, item):
+        return hasattr(item, "heap_id") and item.heap_id == self.id
+
     def __str__(self):
         s = "["
         b = False
@@ -70,7 +73,8 @@ class Heap:
             _HeapMember.remove(item)
             self._size -= 1
             self._arr.remove(item)
-            self._heapify_down(last)
+            if self.size() > 0:
+                self._heapify_down(last)
             return item, priority
         else:
             print("Cannot remove : Item not in heap")
