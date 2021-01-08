@@ -56,7 +56,7 @@ class DiGraph(GraphInterface):
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
         if node_id in self._Nodes.keys():
             return False
-        self._Nodes[node_id] = NodeData(node_id)
+        self._Nodes[node_id] = NodeData(node_id, pos)
         self._Edges[node_id] = {}
         self._Backward_Edges[node_id] = {}
         self._MC += 1
