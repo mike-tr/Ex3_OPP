@@ -4,7 +4,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-from Heap import Heap
+from src.utilities.Heap import Heap
 
 
 def print_hi(name):
