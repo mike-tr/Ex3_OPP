@@ -7,22 +7,22 @@ class node_data:
         self._weight = 0
         self._pos = (0, 0, 0)
 
-    def getkey(self) -> int:
+    def get_key(self) -> int:
         return self._key
 
-    def gettag(self):
+    def get_tag(self):
         return self._tag
 
-    def getweight(self):
+    def get_weight(self):
         return self._weight
 
-    def getpos(self):
+    def get_pos(self):
         return self._pos
 
-    def settag(self, tag):
+    def set_tag(self, tag):
         self._tag = tag
 
-    def setweight(self, weight):
+    def set_weight(self, weight):
         self._weight = weight
 
     def setpos(self, x: float, y: float, z: float):
@@ -35,6 +35,6 @@ class node_data:
 
     def __eq__(self, other):
         if isinstance(other, node_data):
-            if other.getkey() == self._key:
+            if other.get_key() == self._key:
                 return True
         return False
