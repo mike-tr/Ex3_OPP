@@ -47,6 +47,12 @@ class Heap:
         s += "]"
         return s
 
+    def __del__(self):
+        for item in self._arr:
+            _HeapMember.remove(item)
+        self._arr = []
+        self._size = 0
+
     def add_item(self, item, priority):
         if is_primitive(item):
             print("primitives types are not supported by heap!")

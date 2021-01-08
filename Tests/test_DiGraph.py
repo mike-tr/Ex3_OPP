@@ -1,18 +1,7 @@
 from unittest import TestCase
 from src.DiGraph import DiGraph
+from Tests.dummyGraph import graph_creator
 import random
-
-
-def graph_gen(v_size: int, e_size: int) -> DiGraph:
-    graph = DiGraph()
-    for i in range(v_size):
-        graph.add_node(i)
-    random.seed(42)
-    a = random.randint(0, v_size)
-    b = random.randint(0, v_size)
-    w = random.uniform(0.1, 10)
-    graph.add_edge(a, b, w)
-    return graph
 
 
 class TestDiGraph(TestCase):
@@ -20,12 +9,12 @@ class TestDiGraph(TestCase):
     def test_runtime(self):
         v = 1000000
         e = v * 10
-        graph = graph_gen(v, e)
+        graph = graph_creator(v, e)
 
     def test_copy(self):
         v = 10000
         e = v * 10
-        graph = graph_gen(v, e)
+        graph = graph_creator(v, e)
         graph2 = DiGraph()
         graph2.copy(graph)
         TestCase.assertEqual(self, graph, graph2)

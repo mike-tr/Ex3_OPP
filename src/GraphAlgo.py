@@ -53,19 +53,21 @@ class GraphAlgo(GraphAlgoInterface):
         modified = [start]
         path = []
 
+        shortest_dist = float("inf")
         heap = Heap()
         _DistNode.add_fields(start, None, 0)
         heap.add_item(start, 0)
         while heap.size() > 0:
             current: _DistNode = heap.pop_first()[0]
             if current == dest:
+                shortest_dist = current.path_distance
                 while current is not None:
-                    path.append(current)
+                    path.insert(0, current.get_key())
                     current = current.path_parent
+                break
 
             edge: (int, float)
-            for edge in self.graph.all_out_edges_of_node(current.get_key()):
-                print(edge, " ,")
+            for edge in self.graph.all_out_edges_of_node(current.get_key()).items():
                 neighbour: _DistNode = self.graph.get_node(edge[0])
                 distance = current.path_distance + edge[1]
                 if _DistNode.is_dist_node(neighbour):
@@ -74,14 +76,20 @@ class GraphAlgo(GraphAlgoInterface):
                         neighbour.path_parent = current
                         heap.heapify_up(neighbour, distance)
                 else:
-                    _DistNode.add_fields(neighbour, distance)
+                    _DistNode.add_fields(neighbour, current, distance)
                     heap.add_item(neighbour, distance)
-
+                    modified.append(neighbour)
+        heap.__del__()
         for node in modified:
             _DistNode.remove_fields(node)
-        print(start)
+        return shortest_dist, path
 
-        return path
+    """
+    Returns the shortest path from node id1 to node id2 using Dijkstra's Algorithm
+    @param id1: The start node id
+    @param id2: The end node id
+    @return: (path_distance, path) : (float, list)
+    """
 
     def connected_component(self, id1: int) -> list:
         pass
