@@ -12,11 +12,12 @@ def check_type(graph: DiGraph) -> bool:
 
 def Graph_to_Json(graph: DiGraph, file: str):
     dic = {}
+    t = check_type(graph)
     nodes_arr = []
     edges_arr = []
     node: NodeData
     for node in graph.get_all_v().values():
-        if check_type(graph):
+        if t:
             nodes_arr.append({"id": node.get_key()})
         else:
             pos = node.pos
@@ -32,13 +33,29 @@ def Graph_to_Json(graph: DiGraph, file: str):
         f.close()
 
 
+def check_type_(nodes: list) -> bool:
+    return "pos" in nodes[0].keys()
+
+
 def Json_to_Graph(file: str) -> DiGraph:
     with open(file) as f:
         json_string = json.load(f)
         f.close
+    graph = DiGraph()
     dic = dict(json_string)
     nodes = dic['Nodes']
-    if 'pos' in nodes[0].keys():
-
-    else:
-
+    ty = check_type_(nodes)
+    node: dict
+    for node in nodes:
+        if ty:
+            pos: str
+            pos = node['pos']
+            pos = pos.split(',')
+            pos: list
+            pos = tuple(map(float, pos))
+            graph.add_node(node['id'], pos)
+        else:
+            graph.add_node(node['id'])
+    for edge in dic['Edges']:
+        graph.add_edge(edge['src'], edge['dest'], edge['w'])
+    return graph
