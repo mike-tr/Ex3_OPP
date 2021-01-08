@@ -12,12 +12,14 @@ class GraphAlgo(GraphAlgoInterface):
             graph = DiGraph()
         elif not isinstance(graph, DiGraph):
             graph = DiGraph(graph)
+        self.graph = graph
 
     def get_graph(self) -> GraphInterface:
         return self.graph
 
     def shortest_path(self, id1: int, id2: int) -> (float, list):
-        first = self.graph
+        first = next(iter(self.graph.get_all_v()))
+        print(first)
         pass
 
     def connected_component(self, id1: int) -> list:
