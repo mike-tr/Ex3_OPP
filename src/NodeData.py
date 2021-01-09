@@ -3,17 +3,17 @@ from src.utilities.Vector3 import Vector3
 
 class NodeData:
     def __init__(self, key: int, pos: tuple = None):
-        self.default_pos = Vector3(0, 0, 0)
         self._key = key
         if pos is not None:
-            self.pos = Vector3(pos[0], pos[1], pos[2])
+            self.pos: Vector3 = Vector3(pos[0], pos[1], pos[2])
         else:
-            self.pos = None
+            self.pos: Vector3 = None
+            self.default_pos = Vector3(0, 0, 0)
 
     def get_key(self) -> int:
         return self._key
 
-    def get_draw_pos(self):
+    def get_draw_pos(self) -> Vector3:
         if self.pos is None:
             return self.default_pos
         return self.pos
