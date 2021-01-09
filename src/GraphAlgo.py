@@ -5,6 +5,7 @@ from src.GraphInterface import GraphInterface
 from src.DiGraph import DiGraph
 from src.utilities.Heap import Heap
 from src.NodeData import NodeData
+from src.SCCAlgo import SCCAlgo
 
 
 class _DistNode(NodeData):
@@ -30,20 +31,27 @@ class GraphAlgo(GraphAlgoInterface):
     convert it to be DiGraph algo.
     """
 
-    def __init__(self, graph: DiGraph):
+    def __init__(self, graph: DiGraph = None):
+        self._graph: DiGraph = None
+        self._scc = SCCAlgo()
+        self._scc_update = -1
+        self.set_graph(graph)
+
+    def set_graph(self, graph):
         if graph is None:
             graph = DiGraph()
         elif not isinstance(graph, DiGraph):
             graph = DiGraph(graph)
-        self.graph = graph
+        self._graph = graph
+        self._scc_update = -1
 
     def get_graph(self) -> GraphInterface:
-        return self.graph
+        return self._graph
 
     # noinspection PyTypeChecker
     def shortest_path(self, id1: int, id2: int) -> (float, list):
-        start: _DistNode = self.graph.get_node(id1)
-        dest: _DistNode = self.graph.get_node(id2)
+        start: _DistNode = self._graph.get_node(id1)
+        dest: _DistNode = self._graph.get_node(id2)
 
         if dest is None or start is None:
             return float("inf"), []
@@ -68,8 +76,8 @@ class GraphAlgo(GraphAlgoInterface):
                 break
 
             edge: (int, float)
-            for edge in self.graph.all_out_edges_of_node(current.get_key()).items():
-                neighbour: _DistNode = self.graph.get_node(edge[0])
+            for edge in self._graph.all_out_edges_of_node(current.get_key()).items():
+                neighbour: _DistNode = self._graph.get_node(edge[0])
                 distance = current.path_distance + edge[1]
                 if _DistNode.is_dist_node(neighbour):
                     if neighbour.path_distance > distance:
@@ -93,10 +101,21 @@ class GraphAlgo(GraphAlgoInterface):
     """
 
     def connected_component(self, id1: int) -> list:
-        pass
+        node: NodeData = self._graph.get_node(id1)
+        if node is None:
+            return []
+        scc: list
+        for scc in self.connected_components():
+            if scc.__contains__(id1):
+                return scc
+        return []
 
     def connected_components(self) -> List[list]:
-        pass
+        if self._scc_update == self._graph.get_mc():
+            return self._scc.components
+        self._scc.calculate_scc(self._graph)
+        self._scc_update = self._graph.get_mc()
+        return self._scc.components
 
     def plot_graph(self) -> None:
         pass

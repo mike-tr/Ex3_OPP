@@ -10,6 +10,28 @@ def dump(obj):
 
 class TestGraphAlgo(Tester):
 
+    def test_scc(self):
+        g = graph_creator(15)
+        g.add_edge(9, 0, 2)
+        for i in range(1, 10):
+            g.add_edge(i - 1, i, 1)
+        g.add_edge(10, 11, 3)
+        g.add_edge(11, 12, 3)
+        g.add_edge(12, 10, 2)
+
+        algo = GraphAlgo(g)
+        Tester.assertEqual(self, len(algo.connected_components()), 4)
+        Tester.assertEqual(self, len(algo.connected_component(1)), len(algo.connected_component(2)))
+        Tester.assertEqual(self, len(algo.connected_component(1)), 10)
+        Tester.assertEqual(self, algo.connected_component(3), algo.connected_component(4))
+        Tester.assertNotEqual(self, algo.connected_component(5), algo.connected_component(10))
+
+        Tester.assertTrue(self, algo.connected_components().__contains__(algo.connected_component(0)))
+        print(algo.connected_components())
+        print(algo.connected_component(1))
+        print(algo.connected_component(10))
+        print(algo.connected_component(13))
+
     def test_path_to_self(self):
         g = graph_creator(10)
         algo = GraphAlgo(g)

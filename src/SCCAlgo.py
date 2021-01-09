@@ -10,20 +10,14 @@ class _DfsNode(NodeData):
     def __init__(self):
         self.dfs_parent: _DfsNode = None
         self.dfs_color = WHITE
-        self.dfs_start_time = 0
-        self.dfs_end_time = 0
 
     def add_fields(self, parent: __init__):
         self.dfs_parent = parent
         self.dfs_color = WHITE
-        self.dfs_start_time = 0
-        self.dfs_end_time = 0
 
     def remove_fields(self):
         delattr(self, "dfs_parent")
         delattr(self, "dfs_color")
-        delattr(self, "dfs_start_time")
-        delattr(self, "dfs_end_time")
 
     def is_dist_node(self):
         return hasattr(self, "dfs_parent")
@@ -31,30 +25,63 @@ class _DfsNode(NodeData):
 
 # noinspection PyTypeChecker
 class SCCAlgo:
-    def __init__(self, graph: DiGraph):
-        self.graph = graph
-        self.time = 0
+    def __init__(self):
+        self._graph = None
+        self._dag = []
+        self._component = []
+        self.components = []
 
-    def dfs_visit(self, node: _DfsNode):
+    def calculate_scc(self, graph: DiGraph):
+        if not isinstance(graph, DiGraph):
+            return
+        self._graph = graph
+        self._dfs_forward()
+        self._dfs_backwards()
+
+        for node_id in self._graph.get_all_v():
+            node = self._graph.get_node(node_id)
+            _DfsNode.remove_fields(node)
+        return self.components
+
+    def _dfs_backwards(self):
+        self.components = []
+        self._component = []
+        node: _DfsNode
+        for node in self._dag:
+            node.dfs_color = WHITE
+
+        for node in self._dag:
+            if node.dfs_color is WHITE:
+                self._dfs_component(node)
+                self.components.append(self._component)
+                self._component = []
+
+    def _dfs_component(self, node: _DfsNode):
         node.dfs_color = GRAY
-        self.time += 1
-        node.dfs_start_time = self.time
-        for neighbour_id in self.graph.all_out_edges_of_node(node.get_key()).keys():
-            neighbour: _DfsNode = self.graph.get_node(neighbour_id)
+        self._component.append(node.get_key())
+
+        for neighbour_id in self._graph.all_in_edges_of_node(node.get_key()).keys():
+            neighbour: _DfsNode = self._graph.get_node(neighbour_id)
+            if neighbour.dfs_color is WHITE:
+                self._dfs_component(neighbour)
+
+    def _dfs_forward(self):
+        for node_id in self._graph.get_all_v():
+            node = self._graph.get_node(node_id)
+            _DfsNode.add_fields(node, None)
+
+        for node_id in self._graph.get_all_v():
+            node: _DfsNode = self._graph.get_node(node_id)
+            if node.dfs_color is WHITE:
+                self._dfs_visit(node)
+
+    def _dfs_visit(self, node: _DfsNode):
+        node.dfs_color = GRAY
+        for neighbour_id in self._graph.all_out_edges_of_node(node.get_key()).keys():
+            neighbour: _DfsNode = self._graph.get_node(neighbour_id)
             if neighbour.dfs_color is WHITE:
                 neighbour.dfs_parent = node
-                self.dfs_visit(neighbour)
+                self._dfs_visit(neighbour)
 
         node.dfs_color = BLACK
-        self.time += 1
-        node.dfs_end_time = self.time
-
-    def dfs_forward(self, start: int):
-        for node_id in self.graph.get_all_v():
-            node = self.graph.get_node(node_id)
-            _DfsNode.add_fields(node, None)
-        self.time = 0
-        for node_id in self.graph.get_all_v():
-            node: _DfsNode = self.graph.get_node(node_id)
-            if node.dfs_color is WHITE:
-                self.dfs_visit(node)
+        self._dag.insert(0, node)
