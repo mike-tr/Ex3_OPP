@@ -7,6 +7,9 @@ class Vector3:
         self.y = y
         self.z = z
 
+    def __repr__(self):
+        return str(float(self.x)) + "," + str(float(self.y)) + "," + str(float(self.z))
+
     def to_tuple2d(self) -> (float, float):
         return self.x, self.y
 

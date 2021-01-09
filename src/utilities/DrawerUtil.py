@@ -17,8 +17,8 @@ def update_bounds(min_bound: _Vec3, max_bound: _Vec3, target: _Vec3):
 
 
 def create_default_positions(graph: _DiGraph) -> (_Vec3, _Vec3):
-    min_bound = _Vec3(float("-inf"), float("-inf"), 0)
-    max_bound = _Vec3(float("inf"), float("inf"), 0)
+    min_bound = _Vec3(float("inf"), float("inf"), 0)
+    max_bound = _Vec3(float("-inf"), float("-inf"), 0)
 
     non_pos_nodes = []
 
@@ -29,6 +29,8 @@ def create_default_positions(graph: _DiGraph) -> (_Vec3, _Vec3):
         else:
             non_pos_nodes.append(node)
 
+    print(min_bound, max_bound)
+
     if min_bound.x == max_bound.x:
         min_bound.x -= 0.5
         max_bound.x += 0.5
@@ -37,7 +39,7 @@ def create_default_positions(graph: _DiGraph) -> (_Vec3, _Vec3):
         min_bound.y -= 0.5
         max_bound.y += 0.5
 
-    if min_bound.y == float("-inf"):
+    if min_bound.y == float("inf"):
         min_bound = _Vec3(0, 0, 0)
         max_bound = _Vec3(1, 1, 0)
 
@@ -48,3 +50,4 @@ def create_default_positions(graph: _DiGraph) -> (_Vec3, _Vec3):
     for node in non_pos_nodes:
         node.default_pos = _Vec3(_rand.random() * scale.x, _rand.random() * scale.y, 0)
         node.default_pos += min_bound
+    return min_bound, max_bound
