@@ -7,6 +7,12 @@ class Vector3:
         self.y = y
         self.z = z
 
+    def to_tuple2d(self) -> (float, float):
+        return self.x, self.y
+
+    def to_tuple3d(self) -> (float, float, float):
+        return self.x, self.y, self.z
+
     def sqrt_magnitude(self):
         return self.x ** 2 + self.y ** 2 + self.z ** 2
 
