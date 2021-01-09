@@ -7,6 +7,7 @@ from src.utilities.Heap import Heap
 from src.NodeData import NodeData
 from src.SCCAlgo import SCCAlgo
 from src.utilities import Jsonconverter as JGraph
+from src.utilities.GraphDrawer import plot_graph
 
 
 class _DistNode(NodeData):
@@ -119,7 +120,7 @@ class GraphAlgo(GraphAlgoInterface):
         return self._scc.components
 
     def plot_graph(self) -> None:
-        pass
+        plot_graph(self._graph)
 
     def save_to_json(self, file_name: str) -> bool:
         try:

@@ -13,6 +13,27 @@ def dump(obj):
 
 # noinspection DuplicatedCode
 class TestGraphAlgo(Tester):
+    def test_plot_mixed(self):
+        graph = graph_creator(100, 100)
+        ga = GraphAlgo(graph)
+
+        graph.add_node(200, (0, 0, 0))
+        graph.add_node(201, (10, 5, 0))
+
+        graph.add_edge(200, 201, 1)
+        ga.plot_graph()
+
+    def test_plot_random(self):
+        graph = graph_creator(100, 100)
+        ga = GraphAlgo(graph)
+
+        ga.plot_graph()
+
+    def test_plot(self):
+        ga = GraphAlgo()
+        ga.load_from_json("../data/A0")
+        ga.plot_graph()
+
     def test_load_save_fail(self):
         file = "../data/not_existing_file"
         algo = GraphAlgo()
@@ -66,7 +87,6 @@ class TestGraphAlgo(Tester):
 
         compare = GJson.graph_to_json(graph)
         Tester.assertEqual(self, compare, json_string)
-
 
         print(compare, "\n", json_string)
 

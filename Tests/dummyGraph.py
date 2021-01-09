@@ -6,7 +6,6 @@ def graph_creator(v_size: int, e_size: int = 0) -> DiGraph:
     graph = DiGraph()
     for i in range(v_size):
         graph.add_node(i)
-    random.seed(42)
 
     for i in range(e_size):
         a = random.randint(0, v_size)
