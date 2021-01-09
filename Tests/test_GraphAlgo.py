@@ -67,6 +67,7 @@ class TestGraphAlgo(Tester):
         compare = GJson.graph_to_json(graph)
         Tester.assertEqual(self, compare, json_string)
 
+
         print(compare, "\n", json_string)
 
         graph.add_node(13)
