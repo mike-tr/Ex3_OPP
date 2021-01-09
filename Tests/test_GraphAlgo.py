@@ -9,6 +9,13 @@ def dump(obj):
 
 
 class TestGraphAlgo(Tester):
+    def test_empty_graph(self):
+        algo = GraphAlgo()
+        path = algo.shortest_path(1, 2)
+        Tester.assertEqual(self, path[1], [])
+        Tester.assertEqual(self, path[0], float("inf"))
+        Tester.assertEqual(self, algo.connected_components(), [])
+        Tester.assertEqual(self, algo.connected_component(10), [])
 
     def test_scc(self):
         g = graph_creator(15)
