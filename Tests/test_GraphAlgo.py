@@ -2,13 +2,115 @@ from unittest import TestCase as Tester
 from src.GraphAlgo import GraphAlgo
 from src.DiGraph import DiGraph
 from Tests.dummyGraph import graph_creator
+from src.utilities import Jsonconverter as GJson
+
+import json
 
 
 def dump(obj):
     print(obj.__dict__)
 
 
+# noinspection DuplicatedCode
 class TestGraphAlgo(Tester):
+    def test_load_save_fail(self):
+        file = "../data/not_existing_file"
+        algo = GraphAlgo()
+        Tester.assertFalse(self, algo.load_from_json(file))
+
+        algo._graph = None
+        Tester.assertFalse(self, algo.save_to_json(file))
+
+    def test_save_mixed(self):
+        file = "../data/Test"
+
+        graph = DiGraph()
+        for i in range(3):
+            graph.add_node(i, (i * i, i + 1.2, i + 2.1))
+        graph.add_node(5)
+        graph.add_node(6)
+        graph.add_edge(1, 2, 3)
+        graph.add_edge(1, 2, 4)
+        graph.add_edge(1, 2, 3)
+        graph.add_edge(1, 2, 4)
+
+        algo = GraphAlgo(graph)
+        algo.save_to_json(file)
+        algo.load_from_json(file)
+
+        compare1 = GJson.graph_to_json(graph)
+        compare2 = GJson.graph_to_json(algo.get_graph())
+
+        print(graph, "\n", algo.get_graph())
+        print(compare1, "\n", compare2)
+
+        Tester.assertEqual(self, compare1, compare2)
+        Tester.assertNotEqual(self, str(graph), str(algo.get_graph()))
+
+    def test_save_pos(self):
+        file = "../data/Test"
+
+        graph = DiGraph()
+        for i in range(10):
+            graph.add_node(i, (i * i, i + 1.2, i + 2))
+
+        for i in range(1, 10):
+            graph.add_edge(i - 1, i, i)
+
+        algo = GraphAlgo(graph)
+        algo.save_to_json(file)
+
+        with open(file) as f:
+            json_string = json.load(f)
+            f.close()
+
+        compare = GJson.graph_to_json(graph)
+        Tester.assertEqual(self, compare, json_string)
+
+        print(compare, "\n", json_string)
+
+        graph.add_node(13)
+        algo.save_to_json(file)
+
+        with open(file) as f:
+            json_string = json.load(f)
+            f.close()
+
+        compare = GJson.graph_to_json(graph)
+        Tester.assertEqual(self, compare, json_string)
+        print(compare, "\n", json_string)
+
+    def test_save(self):
+        file = "../data/Test"
+
+        graph = graph_creator(100, 100)
+
+        algo = GraphAlgo(graph)
+        algo.save_to_json(file)
+
+        with open(file) as f:
+            json_string = json.load(f)
+            f.close()
+
+        compare = GJson.graph_to_json(algo.get_graph())
+        Tester.assertEqual(self, compare, json_string)
+
+        print(compare, "\n", json_string)
+
+    def test_load(self):
+        file = "../data/A0"
+
+        json_string = ""
+        with open(file) as f:
+            json_string = json.load(f)
+            f.close()
+
+        algo = GraphAlgo()
+        algo.load_from_json(file)
+
+        compare = GJson.graph_to_json(algo.get_graph())
+        Tester.assertEqual(self, compare, json_string)
+
     def test_empty_graph(self):
         algo = GraphAlgo()
         path = algo.shortest_path(1, 2)

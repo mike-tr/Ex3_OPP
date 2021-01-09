@@ -6,6 +6,7 @@ from src.DiGraph import DiGraph
 from src.utilities.Heap import Heap
 from src.NodeData import NodeData
 from src.SCCAlgo import SCCAlgo
+from src.utilities import Jsonconverter as JGraph
 
 
 class _DistNode(NodeData):
@@ -45,7 +46,7 @@ class GraphAlgo(GraphAlgoInterface):
         self._graph = graph
         self._scc_update = -1
 
-    def get_graph(self) -> GraphInterface:
+    def get_graph(self) -> DiGraph:
         return self._graph
 
     # noinspection PyTypeChecker
@@ -121,7 +122,18 @@ class GraphAlgo(GraphAlgoInterface):
         pass
 
     def save_to_json(self, file_name: str) -> bool:
-        pass
+        try:
+            JGraph.save_graph(self._graph, file_name)
+            return True
+        except:
+            return False
 
     def load_from_json(self, file_name: str) -> bool:
-        pass
+        try:
+            graph = JGraph.load_graph(file_name)
+            if graph is None:
+                return False
+            self._graph = graph
+            return True
+        except:
+            return False

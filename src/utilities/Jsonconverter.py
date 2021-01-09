@@ -1,61 +1,58 @@
-from src.DiGraph import DiGraph
-from src.NodeData import NodeData
-import json
+from src.DiGraph import DiGraph as _DiGraph
+from src.NodeData import NodeData as _NodeData
+import json as _json
 
 
 # Checks if node has pos
-def check_type(graph: DiGraph) -> bool:
-    node: NodeData
+def check_type(graph: _DiGraph) -> bool:
+    node: _NodeData
     for node in graph.get_all_v().values():
-        return node.pos == None
+        return node.pos is None
 
 
-def graph_to_json(graph: DiGraph, file: str):
+def graph_to_json(graph: _DiGraph) -> dict:
     dic = {}
     t = check_type(graph)
     nodes_arr = []
     edges_arr = []
-    node: NodeData
+    node: _NodeData
     for node in graph.get_all_v().values():
-        if t:
+        if node.pos is None:
             nodes_arr.append({"id": node.get_key()})
         else:
             pos = node.pos
-            p = str(pos.x) + "," + str(pos.y) + "," + str(pos.z)
+            p = str(float(pos.x)) + "," + str(float(pos.y)) + "," + str(float(pos.z))
             nodes_arr.append({"id": node.get_key(), "pos": p})
         for edge in graph.all_out_edges_of_node(node.get_key()).items():
             dic2 = {"src": node.get_key(), "dest": edge[0], "w": edge[1]}
             edges_arr.append(dic2)
     dic["Nodes"] = nodes_arr
     dic["Edges"] = edges_arr
+    return dic
+
+
+def save_graph(graph: _DiGraph, file: str):
+    dic = graph_to_json(graph)
     with open(file, 'w') as f:
-        json.dump(dic, f)
+        _json.dump(dic, f)
         f.close()
 
 
-def check_type_(nodes: list) -> bool:
-    return "pos" in nodes[0].keys()
-
-
-def json_to_graph(file: str) -> DiGraph:
+def load_graph(file: str) -> _DiGraph:
     with open(file) as f:
-        json_string = json.load(f)
-        f.close
-    graph = DiGraph()
+        json_string = _json.load(f)
+        f.close()
+    graph = _DiGraph()
     dic = dict(json_string)
     nodes = dic['Nodes']
-    ty = check_type_(nodes)
     node: dict
     for node in nodes:
-        if ty:
-            pos: str
-            pos = node['pos']
-            pos = pos.split(',')
-            pos: list
-            pos = tuple(map(float, pos))
-            graph.add_node(node['id'], pos)
-        else:
-            graph.add_node(node['id'])
+        pos: object = None
+        if "pos" in node:
+            pos: str = node['pos']
+            pos: list = pos.split(',')
+            pos: tuple = tuple(map(float, pos))
+        graph.add_node(node['id'], pos)
     for edge in dic['Edges']:
         graph.add_edge(edge['src'], edge['dest'], edge['w'])
     return graph
