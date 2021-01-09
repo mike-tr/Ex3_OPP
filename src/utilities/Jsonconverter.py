@@ -10,7 +10,7 @@ def check_type(graph: DiGraph) -> bool:
         return node.pos == None
 
 
-def Graph_to_Json(graph: DiGraph, file: str):
+def graph_to_json(graph: DiGraph, file: str):
     dic = {}
     t = check_type(graph)
     nodes_arr = []
@@ -37,7 +37,7 @@ def check_type_(nodes: list) -> bool:
     return "pos" in nodes[0].keys()
 
 
-def Json_to_Graph(file: str) -> DiGraph:
+def json_to_graph(file: str) -> DiGraph:
     with open(file) as f:
         json_string = json.load(f)
         f.close
