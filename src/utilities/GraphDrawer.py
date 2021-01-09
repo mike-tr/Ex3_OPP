@@ -25,8 +25,8 @@ def draw(graph: DiGraph):
             other_pos = graph.get_node(edge).get_draw_pos()
             direction = (other_pos - pos)
             offset = direction.normalize() * scale.x * 0.02
-            start = pos + offset
-            direction -= offset * 2
+            start = pos
+            direction -= offset * 1
             ax.arrow(start.x, start.y, direction.x, direction.y,
                      width=0.001 * scale.x,
                      head_width=0.01 * scale.x,
@@ -45,7 +45,7 @@ def draw(graph: DiGraph):
 
 if __name__ == '__main__':
     ga = GraphAlgo()
-    ga.load_from_json("../../data/A3")
+    ga.load_from_json("../../data/A5")
     graph = ga.get_graph()
     print(graph)
     draw(graph)
