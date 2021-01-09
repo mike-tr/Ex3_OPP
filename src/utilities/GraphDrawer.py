@@ -11,22 +11,21 @@ def draw(graph: DiGraph):
     scale: Vector3 = bounds[1] - bounds[0]
 
     print(bounds)
-
+    fig, ax = plt.subplots()
     nodes = graph.get_all_v().values()
     node: NodeData
-
     for node in nodes:
         pos = node.get_draw_pos()
-
-        # plt.Circle(())
         plt.scatter(pos.x, pos.y, s=100, color='r')
+        # circle = plt.Circle((pos.x, pos.y), 0.5*plt.xscale(1), color='r')
+        # ax.add_artist(circle)
         plt.text(pos.x + scale.x * 0.02, pos.y + scale.y * 0.06, str(node.get_key()))
         edges: dict
         for edge in graph.all_out_edges_of_node(node.get_key()).keys():
             other_pos = graph.get_node(edge).get_draw_pos()
             direction = (other_pos - pos)
             start = pos
-            direction = direction * 0.9
-
-            plt.arrow(start.x, start.y, direction.x, direction.y, width=0.00001, head_width=scale.x * 0.015)
+            direction = direction * 0.75
+            arrow = plt.arrow(start.x, start.y, direction.x, direction.y, width=0.00001, head_width=scale.x * 0.015)
+            ax.add_artist(arrow)
     plt.show()
