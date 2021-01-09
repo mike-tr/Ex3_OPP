@@ -14,18 +14,38 @@ def draw(graph: DiGraph):
     fig, ax = plt.subplots()
     nodes = graph.get_all_v().values()
     node: NodeData
+
+    ax: plt.Axes = plt.axes()
     for node in nodes:
         pos = node.get_draw_pos()
-        plt.scatter(pos.x, pos.y, s=100, color='r')
         # circle = plt.Circle((pos.x, pos.y), 0.5*plt.xscale(1), color='r')
         # ax.add_artist(circle)
-        plt.text(pos.x + scale.x * 0.02, pos.y + scale.y * 0.06, str(node.get_key()))
         edges: dict
         for edge in graph.all_out_edges_of_node(node.get_key()).keys():
             other_pos = graph.get_node(edge).get_draw_pos()
             direction = (other_pos - pos)
-            start = pos
-            direction = direction * 0.75
-            arrow = plt.arrow(start.x, start.y, direction.x, direction.y, width=0.00001, head_width=scale.x * 0.015)
-            ax.add_artist(arrow)
+            offset = direction.normalize() * scale.x * 0.02
+            start = pos + offset
+            direction -= offset * 2
+            ax.arrow(start.x, start.y, direction.x, direction.y,
+                     width=0.001 * scale.x,
+                     head_width=0.01 * scale.x,
+                     head_length=0.02 * scale.x,
+                     head_starts_at_zero=True,
+                     length_includes_head=True,
+                     fc='k',
+                     ec='k')
+        print(pos)
+        plt.scatter(pos.x, pos.y, c='b')
+        # ax.add_artist(plt.Circle(xy=pos.to_tuple2d(), radius=scale.x * 0.01))
+        ax.text(pos.x + scale.x * 0.02, pos.y + scale.y * 0.03, str(node.get_key()))
+    ax.set_aspect('equal', adjustable='datalim')
     plt.show()
+
+
+if __name__ == '__main__':
+    ga = GraphAlgo()
+    ga.load_from_json("../../data/A3")
+    graph = ga.get_graph()
+    print(graph)
+    draw(graph)
