@@ -1,6 +1,7 @@
 from src.DiGraph import DiGraph as _DiGraph
 from src.NodeData import NodeData as _NodeData
 import json as _json
+import networkx as nx
 
 
 # Checks if node has pos
@@ -55,4 +56,25 @@ def load_graph(file: str) -> _DiGraph:
         graph.add_node(node['id'], pos)
     for edge in dic['Edges']:
         graph.add_edge(edge['src'], edge['dest'], edge['w'])
+    return graph
+
+
+def load_networkx_graph(file: str) -> nx.Graph:
+    with open(file) as f:
+        json_string = _json.load(f)
+        f.close()
+    graph = nx.Graph()
+    dic = dict(json_string)
+    nodes = dic['Nodes']
+    node: dict
+    for node in nodes:
+        pos: object = None
+        if "pos" in node:
+            pos: str = node['pos']
+            pos: list = pos.split(',')
+            pos: tuple = tuple(map(float, pos))
+        graph.add_node(node['id'])
+        graph.nodes[node['id']]['pos'] = pos
+    for edge in dic['Edges']:
+        graph.add_edge(edge['src'], edge['dest'], weight=edge['w'])
     return graph
