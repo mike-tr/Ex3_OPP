@@ -7,7 +7,7 @@ algo: GraphAlgo = None
 v = 100000
 e = v * 10
 
-path = "../../MyGraph"
+path = "../../data/G_10000_80000_0.json"
 save = e < 5000001
 
 
@@ -24,5 +24,5 @@ if __name__ == '__main__':
     print(time.time() - t)
 
     t = time.time()
-    print(algo.shortest_path(0, 1000))
+    print(algo.connected_components())
     print(time.time() - t)
