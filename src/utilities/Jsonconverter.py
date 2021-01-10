@@ -59,11 +59,11 @@ def load_graph(file: str) -> _DiGraph:
     return graph
 
 
-def load_networkx_graph(file: str) -> nx.Graph:
+def load_networkx_graph(file: str) -> nx.DiGraph:
     with open(file) as f:
         json_string = _json.load(f)
         f.close()
-    graph = nx.Graph()
+    graph = nx.DiGraph()
     dic = dict(json_string)
     nodes = dic['Nodes']
     node: dict
