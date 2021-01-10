@@ -8,8 +8,8 @@ from src.NodeData import NodeData
 import time
 
 graph: DiGraph = None
-v = 100000
-e = v * 2
+v = 1000
+e = v * 50
 
 path = "../MyGraph"
 save = e < 5000001
@@ -24,6 +24,7 @@ def test_load():
 
 # noinspection PyMethodMayBeStatic
 class MyTestCase(Tester):
+
     def test_creation(self):
         global graph
         graph = graph_creator(v, e)

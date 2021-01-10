@@ -14,7 +14,7 @@ def dump(obj):
 # noinspection DuplicatedCode
 class TestGraphAlgo(Tester):
     def test_runtime(self):
-        v = 1000000
+        v = 10000
         e = v * 10
         graph = graph_creator(v, e)
         algo = GraphAlgo(graph)

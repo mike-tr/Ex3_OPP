@@ -9,7 +9,7 @@ class TestDiGraph(TestCase):
     graph: DiGraph = None
 
     def test_runtime(self):
-        v = 1000000
+        v = 100000
         e = v * 5
         TestDiGraph.graph = graph_creator(v, e)
 
