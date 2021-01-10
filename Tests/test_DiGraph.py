@@ -6,11 +6,12 @@ import random
 
 # noinspection DuplicatedCode
 class TestDiGraph(TestCase):
+    graph: DiGraph = None
 
     def test_runtime(self):
-        v = 100000
-        e = v * 10
-        graph = graph_creator(v, e)
+        v = 1000000
+        e = v * 5
+        TestDiGraph.graph = graph_creator(v, e)
 
     def test_copy(self):
         v = 10000
@@ -26,7 +27,7 @@ class TestDiGraph(TestCase):
             graph.add_node(i)
         TestCase.assertEqual(self, 10, graph.v_size())
         graph.add_node(5)
-        TestCase.assertEquals(self, 10, graph.v_size())
+        TestCase.assertEqual(self, 10, graph.v_size())
 
     def test_add_edge(self):
         graph = DiGraph()

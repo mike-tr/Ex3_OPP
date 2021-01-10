@@ -52,6 +52,7 @@ class GraphAlgo(GraphAlgoInterface):
 
     # noinspection PyTypeChecker
     def shortest_path(self, id1: int, id2: int) -> (float, list):
+        """ :return ( distance, path) , calculate the path between two nodes on graph using dijkstra"""
         start: _DistNode = self._graph.get_node(id1)
         dest: _DistNode = self._graph.get_node(id2)
 
@@ -95,14 +96,8 @@ class GraphAlgo(GraphAlgoInterface):
             _DistNode.remove_fields(node)
         return shortest_dist, path
 
-    """
-    Returns the shortest path from node id1 to node id2 using Dijkstra's Algorithm
-    @param id1: The start node id
-    @param id2: The end node id
-    @return: (path_distance, path) : (float, list)
-    """
-
     def connected_component(self, id1: int) -> list:
+        """ :returns the strongly connected component of given node in graph"""
         node: NodeData = self._graph.get_node(id1)
         if node is None:
             return []
@@ -113,6 +108,7 @@ class GraphAlgo(GraphAlgoInterface):
         return []
 
     def connected_components(self) -> List[list]:
+        """ :returns the strongly connected components of the graph"""
         if self._scc_update == self._graph.get_mc():
             return self._scc.components
         self._scc.calculate_scc(self._graph)
@@ -123,6 +119,8 @@ class GraphAlgo(GraphAlgoInterface):
         plot_graph(self._graph)
 
     def save_to_json(self, file_name: str) -> bool:
+        """ saves the graph into the specified file
+            :returns True on success, False if failed"""
         try:
             JGraph.save_graph(self._graph, file_name)
             return True
@@ -130,6 +128,8 @@ class GraphAlgo(GraphAlgoInterface):
             return False
 
     def load_from_json(self, file_name: str) -> bool:
+        """ load a graph from specified file
+            :returns True on success, False if failed"""
         try:
             graph = JGraph.load_graph(file_name)
             if graph is None:

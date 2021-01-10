@@ -25,13 +25,18 @@ class _DfsNode(NodeData):
 
 # noinspection PyTypeChecker
 class SCCAlgo:
+    """
+    this class is responsible for generating Strongly connected components of a given graph
+    """
+
     def __init__(self):
         self._graph = None
         self._dag = []
         self._component = []
         self.components = []
 
-    def calculate_scc(self, graph: DiGraph):
+    def calculate_scc(self, graph: DiGraph) -> list:
+        """this method will generate the a list of all strongly connected components"""
         if not isinstance(graph, DiGraph):
             return
         self._graph = graph
