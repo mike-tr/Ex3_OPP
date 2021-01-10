@@ -13,6 +13,13 @@ def dump(obj):
 
 # noinspection DuplicatedCode
 class TestGraphAlgo(Tester):
+    def test_runtime(self):
+        v = 1000000
+        e = v * 10
+        graph = graph_creator(v, e)
+        algo = GraphAlgo(graph)
+        print(algo.shortest_path(0, 1000))
+
     def test_plot_mixed(self):
         graph = graph_creator(100, 100)
         ga = GraphAlgo(graph)

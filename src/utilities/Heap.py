@@ -30,6 +30,8 @@ class Heap:
         self._arr = []
         self._size = 0
         self.id = Heap.next_id
+        self._bound = 0
+        self.real_size = 0
         Heap.next_id += 1
 
     def in_heap(self, item):
@@ -38,7 +40,9 @@ class Heap:
     def __str__(self):
         s = "["
         b = False
-        for item in self._arr:
+
+        for i in range(self._size):
+            item = self._arr[i]
             if b:
                 s += ", %d" % item.heap_priority
             else:
@@ -48,8 +52,10 @@ class Heap:
         return s
 
     def __del__(self):
-        for item in self._arr:
-            _HeapMember.remove(item)
+        for i in range(self._size):
+            _HeapMember.remove(self.get_item(i))
+        # for item in self._arr:
+        #     _HeapMember.remove(item)
         self._arr = []
         self._size = 0
 
@@ -62,9 +68,15 @@ class Heap:
         _HeapMember.modify(item, self._size, priority, self.id)
         # item.heap_index = self._size
         # item.heap_priority = priority
+        self._bound = int(self._size / 2) - 1
+
+        if self.real_size > self._size:
+            self._arr[self._size] = item
+        else:
+            self._arr.append(item)
+            self.real_size += 1
 
         self._size += 1
-        self._arr.append(item)
         self._heapify_up(item)
 
     def getlast(self):
@@ -78,7 +90,8 @@ class Heap:
             self._swap(item, last)
             _HeapMember.remove(item)
             self._size -= 1
-            self._arr.remove(item)
+            self._bound = int(self._size / 2) - 1
+            # self._arr.remove(item)
             if self.size() > 0:
                 self._heapify_down(last)
             return item, priority
@@ -135,20 +148,55 @@ class Heap:
             return
         target_index = int((item.heap_index - 1) / 2)
         target = self.get_item(target_index)
-        if target.heap_priority > item.heap_priority:
+
+        while target.heap_priority > item.heap_priority:
             self._swap(target, item)
-            self._heapify_up(item)
+            if item.heap_index == 0:
+                return
+            target_index = int((item.heap_index - 1) / 2)
+            target = self.get_item(target_index)
 
     def _heapify_down(self, item: _HeapMember):
-        if item.heap_index > int(self._size / 2) - 1:
+        if item.heap_index > self._bound:
             return
+
         child_index = (item.heap_index + 1) * 2
         target = self.get_item(child_index - 1)
+        while target.heap_priority < item.heap_priority:
+            if child_index < self._size:
+                right_child = self.get_item(child_index)
+                if right_child.heap_priority < target.heap_priority:
+                    target = right_child
+            else:
+                self._swap(target, item)
+                return
+            self._swap(target, item)
+            if item.heap_index > self._bound:
+                return
+            child_index = item.heap_index * 2 + 1
+            target = self.get_item(child_index)
+            child_index += 1
+
         if child_index < self._size:
             right_child = self.get_item(child_index)
-            if target.heap_priority > right_child.heap_priority:
-                target = right_child
+            if right_child.heap_priority < item.heap_priority:
+                self._swap(right_child, item)
+                self._heapify_down(item)
 
-        if target.heap_priority < item.heap_priority:
-            self._swap(target, item)
-            self._heapify_down(item)
+        # child_index = (item.heap_index + 1) * 2
+        # left = self.get_item(child_index - 1)
+        # if child_index >= self._size:
+        #     if left.heap_priority < item.heap_priority:
+        #         self._swap(left, item)
+        #     return
+        #
+        # right = self.get_item(child_index)
+        # if left.heap_priority < item.heap_priority:
+        #     if right.heap_priority < left.heap_priority:
+        #         self._swap(right, item)
+        #     else:
+        #         self._swap(left, item)
+        #     self._heapify_down(item)
+        # elif right.heap_priority < item.heap_priority:
+        #     self._swap(item, right)
+        #     self._heapify_down(item)
