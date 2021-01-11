@@ -1,8 +1,6 @@
 from unittest import TestCase as Tester
-from src.GraphAlgo import GraphAlgo
-from src.DiGraph import DiGraph
 from Tests.dummyGraph import graph_creator
-from src.SCCAlgo import SCCAlgo
+from src.utilities.SCCAlgo import SCCAlgo
 
 
 class TestSCCAlgo(Tester):
