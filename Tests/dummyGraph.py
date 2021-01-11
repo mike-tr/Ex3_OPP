@@ -3,6 +3,7 @@ import random
 
 
 def graph_creator(v_size: int, e_size: int = 0) -> DiGraph:
+    e_size = int(e_size)
     graph = DiGraph()
     for i in range(v_size):
         graph.add_node(i)

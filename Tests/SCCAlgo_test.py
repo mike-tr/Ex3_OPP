@@ -6,6 +6,13 @@ from src.SCCAlgo import SCCAlgo
 
 
 class TestSCCAlgo(Tester):
+    def test_size(self):
+        v = 1000
+        graph = graph_creator(v, v * 2)
+        scc_bfs = SCCAlgo()
+
+        scc_bfs.calculate_scc(graph)
+
     def test_strongly_connected(self):
         graph = graph_creator(100)
         for i in range(1, 100):

@@ -8,6 +8,13 @@ from src.SCCAlgo import SCCAlgo
 
 # noinspection DuplicatedCode
 class TestSCCAlgoBFS(Tester):
+    def test_size(self):
+        v = 1000
+        graph = graph_creator(v, v * 2)
+        scc_bfs = SCCAlgoBFS()
+
+        scc_bfs.calculate_scc(graph)
+
     def test_compare_to_dfs(self):
         v = 1000
         graph = graph_creator(v, v * 2)

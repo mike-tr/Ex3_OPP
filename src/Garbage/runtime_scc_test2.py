@@ -3,27 +3,35 @@ from src.GraphAlgo import GraphAlgo
 from src.utilities.Jsonconverter import load_networkx_graph
 import networkx as nx
 import time
+from Tests.dummyGraph import graph_creator
 
 graph: DiGraph = None
 algo: GraphAlgo = None
-v = 100000
-e = v * 10
+v = 20000
+e = v * 1
 
-path = "../../data/G_20000_160000_0.json"
+path = "../../data/my_graph"
+
+
 # path = "../../data/G_20000_160000_0.json"
 # path = "../../data/G_30000_240000_0.json"
-save = e < 5000001
 
-
-def test_load():
+def test_create():
     global algo
-    algo = GraphAlgo()
+    dummy = graph_creator(v, e)
+    dummy.add_edge(0, 1, 1)
+    dummy.add_edge(1, 0, 1)
+
+    dummy.add_edge(2, 3, 1)
+    dummy.add_edge(3, 2, 1)
+    algo = GraphAlgo(dummy)
+    algo.save_to_json(path)
     algo.load_from_json(path)
 
 
 if __name__ == '__main__':
     t = time.time()
-    test_load()
+    test_create()
     print(algo.get_graph())
     print(time.time() - t)
 

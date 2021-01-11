@@ -1,29 +1,27 @@
 from src.DiGraph import DiGraph
 from src.NodeData import NodeData
+from collections import deque
 
-WHITE = 0
-GRAY = 1
-BLACK = 2
+FRESH = 0
+SEEN = 1
+MARKED = 2
 
 
 class _BfsNode(NodeData):
     def __init__(self):
-        self.bfs_parent: _BfsNode = None
-        self.bfs_color = WHITE
+        self.bfs_color = FRESH
         self.bfs_index = -1
 
     def add_fields(self, parent: __init__):
-        self.bfs_parent = parent
-        self.bfs_color = WHITE
+        self.bfs_color = FRESH
         self.bfs_index = -1
 
     def remove_fields(self):
-        delattr(self, "bfs_parent")
         delattr(self, "bfs_color")
         delattr(self, "bfs_index")
 
     def is_dist_node(self):
-        return hasattr(self, "dfs_parent")
+        return hasattr(self, "bfs_index")
 
 
 # noinspection PyTypeChecker
@@ -55,6 +53,10 @@ class SCCAlgoBFS:
             node = self._graph.get_node(node_id)
             _BfsNode.add_fields(node, None)
 
+        for node_id in self._graph.get_all_v():
+            vertex: _BfsNode = self._graph.get_node(node_id)
+            vertex.bfs_color = FRESH
+
         self.components = []
         for node_id in self._graph.get_all_v():
             node: _BfsNode = self._graph.get_node(node_id)
@@ -66,42 +68,37 @@ class SCCAlgoBFS:
         # print("----------", node.get_key(), "-------------")
         self.component = []
         node.bfs_index = node.get_key()
-        node.bfs_color = GRAY
+        node.bfs_color = MARKED
 
-        arr = [node]
-        size = 1
-        index = 0
+        # arr = [node]
+        stack = deque()
+        stack2 = deque()
 
-        for node_id in self._graph.get_all_v():
-            vertex: _BfsNode = self._graph.get_node(node_id)
-            vertex.bfs_color = WHITE
-
-        while index < size:
-            current: _BfsNode = arr[index]
-            self._dag.append(current)
-            index += 1
+        stack.append(node)
+        while stack:
+            current: _BfsNode = stack.pop()
+            stack2.append(current)
 
             for neighbour_id in self._graph.all_out_edges_of_node(current.get_key()).keys():
                 neighbour: _BfsNode = self._graph.get_node(neighbour_id)
-                if neighbour.bfs_index == -1 and neighbour.bfs_color is WHITE:
-                    neighbour.bfs_color = GRAY
-                    neighbour.bfs_parent = current
-                    arr.append(neighbour)
-                    size += 1
+                if neighbour.bfs_index == -1 and neighbour.bfs_color is FRESH:
+                    neighbour.bfs_color = SEEN
+                    stack.append(neighbour)
 
-        arr = [node]
-        size = 1
-        index = 0
-        while index < size:
-            current: _BfsNode = arr[index]
+        stack = deque()
+        stack.append(node)
+        while stack:
+            current: _BfsNode = stack.pop()
 
             self.component.append(current.get_key())
             current.bfs_index = node.bfs_index
-            index += 1
 
             for neighbour_id in self._graph.all_in_edges_of_node(current.get_key()).keys():
                 neighbour: _BfsNode = self._graph.get_node(neighbour_id)
-                if neighbour.bfs_color is GRAY:
-                    neighbour.bfs_color = BLACK
-                    arr.append(neighbour)
-                    size += 1
+                if neighbour.bfs_color is SEEN:
+                    neighbour.bfs_color = MARKED
+                    stack.append(neighbour)
+
+        while stack2:
+            forget: _BfsNode = stack2.pop()
+            forget.bfs_color = FRESH

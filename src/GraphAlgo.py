@@ -6,6 +6,7 @@ from src.DiGraph import DiGraph
 from src.utilities.Heap import Heap
 from src.NodeData import NodeData
 from src.SCCAlgo import SCCAlgo
+from src.SCCAlgoBFS import SCCAlgoBFS
 from src.utilities import Jsonconverter as JGraph
 from src.utilities.GraphDrawer import plot_graph
 
@@ -35,7 +36,8 @@ class GraphAlgo(GraphAlgoInterface):
 
     def __init__(self, graph: DiGraph = None):
         self._graph: DiGraph = None
-        self._scc = SCCAlgo()
+        # self._scc = SCCAlgo()
+        self._scc = SCCAlgoBFS()
         self._scc_update = -1
         self.set_graph(graph)
 
