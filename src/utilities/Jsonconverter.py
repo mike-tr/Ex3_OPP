@@ -4,16 +4,8 @@ import json as _json
 import networkx as nx
 
 
-# Checks if node has pos
-def check_type(graph: _DiGraph) -> bool:
-    node: _NodeData
-    for node in graph.get_all_v().values():
-        return node.pos is None
-
-
 def graph_to_json(graph: _DiGraph) -> dict:
     dic = {}
-    t = check_type(graph)
     nodes_arr = []
     edges_arr = []
     node: _NodeData

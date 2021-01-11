@@ -15,6 +15,12 @@
 |             | 5m            | 29sec          | 13.4sec     | 
 |             | 10m           | 58sec          | 31.2sec     | 
 
+## Load From Json
+| Nodes       | Edges      | Python-time | NetworkX-time  |
+|   :---:     |   :---:    |   :---:     |   :---:        |
+|1,000,000|10,000,000|39.455 sec|99.896 sec|
+
+## Shortest Path
 | File name      | Nodes       | Edges      | Python-time | NetworkX-time  |
 |   :---:        |   :---:     |   :---:    |   :---:     |   :---:        |
 |G_10_80_0.json|10|80|0.0 sec|0.0 sec|
@@ -23,3 +29,14 @@
 |G_10000_80000_0.json|10000|80000|0.08 sec|0.05 sec|
 |G_20000_160000_0.json|20000|160000|0.03 sec|0.03 sec|
 |G_30000_240000_0.json|30000|240000|0.7 sec|0.36 sec|
+
+## Strongly Connected Components
+| File name      | Nodes       | Edges      | Python-time | NetworkX-time  |
+|   :---:        |   :---:     |   :---:    |   :---:     |   :---:        |
+|G_10_80_0.json|10|80|0.0 sec|0.0 sec|
+|G_100_800_0.json|100|800|0.0 sec|0.0 sec|
+|G_1000_8000_0.json|1000|8000|0.0 sec|0.0 sec|
+|G_10000_80000_0.json|10000|80000|0.111 sec|0.092 sec|
+|G_20000_160000_0.json|20000|160000|0.279 sec|0.203 sec|
+|G_30000_240000_0.json|30000|240000|0.442 sec|0.332 sec|
+
