@@ -63,7 +63,7 @@ def plot_jsons():
     plt.show()
 
 
-def plot_scc():
+def plot_scc(file):
     java_times = [0.437, 0.760, 2.905, 1.24, 4.98, 0]
     python_times = [4.09, 2.33, 9.74, 5.32, 18.56, 27.76]
     network_times = [0.50, 1.51, 6.00, 3.50, 5.359, 18.16]
@@ -72,18 +72,35 @@ def plot_scc():
 
     figp, axp = plot_data(java_times, python_times, network_times, x_labels)
     axp.set_ylabel('time to calculate')
-    axp.set_title('shortest path')
+    axp.set_title('strongly connected components')
 
     figp.tight_layout()
 
+    plt.savefig("../../data_local/" + file, dpi=150)
     plt.show()
 
 
-def plot_scc_single():
-    java_times = [0.06, 0.645, 1.577, 0.055, 0.046]
-    python_times = [0.12, 2.32, 9.64, 1.22, 1.22]
+def plot_scc_single(file):
+    java_times = [0.06, 0.64, 1.57]
+    python_times = [0.12, 2.32, 9.64]
     network_times = None
-    x_labels = ['G_100k_100k', 'G_100k_1m', 'G_100k_5m', 'G_1m_0', 'G_1m_1m']
+    x_labels = ['G_100k_100k', 'G_100k_1m', 'G_100k_5m']
+
+    figp, axp = plot_data(java_times, python_times, network_times, x_labels)
+    axp.set_ylabel('time to calculate')
+    axp.set_title('strongly connected component')
+
+    figp.tight_layout()
+
+    plt.savefig("../../data_local/" + file, dpi=150)
+    plt.show()
+
+
+def plot_paths(file):
+    java_times = [0.01, 0.16, 0.58]
+    python_times = [0.00, 1.88, 4.99]
+    network_times = [0.00, 0.44, 2.31]
+    x_labels = ['G_100k_100k', 'G_100k_1m', 'G_100k_5m']
 
     figp, axp = plot_data(java_times, python_times, network_times, x_labels)
     axp.set_ylabel('time to calculate')
@@ -91,29 +108,12 @@ def plot_scc_single():
 
     figp.tight_layout()
 
+    plt.savefig("../../data_local/" + file, dpi=150)
     plt.show()
-
-
-def plot_paths():
-    java_times = [0.017, 0.168, 0.586, 0.049, 0.037, 0]
-    python_times = [0.00, 1.88, 4.99, 0.00, 0.00, 47.71]
-    network_times = [0.00, 0.44, 2.31, 0.00, 0.00, 12.92]
-    x_labels = ['G_100k_100k', 'G_100k_1m', 'G_100k_5m', 'G_1m_0',
-                'G_1m_1m', 'G_1m_10m']
-
-    figp, axp = plot_data(java_times, python_times, network_times, x_labels)
-    axp.set_ylabel('time to calculate')
-    axp.set_title('shortest path')
-
-    figp.tight_layout()
-
-    plt.show()
-    figure
-
 
 
 if __name__ == '__main__':
     # plot_scc()
-    plot_paths()
-    plot_scc_single()
-    plot_scc()
+    plot_paths("paths.jpg")
+    plot_scc_single("scc_single.jpg")
+    plot_scc("scc.jpg")

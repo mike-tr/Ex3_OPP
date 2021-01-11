@@ -30,8 +30,8 @@ def do_test(file):
     print(algo.shortest_path(0, 1000))
     print("python path time:", time.time() - t)
 
-    t = time.time()
     g = GraphAlgo(algo.get_graph())
+    t = time.time()
     g.connected_component(0)
     # print(g.connected_component(0))
     print("python single_scc time:", time.time() - t)
@@ -53,7 +53,8 @@ def do_test(file):
 
 
 if __name__ == '__main__':
-    directory = ""
-    arr = ["g_100k_100k", "g_100k_1m", "g_100k_5m", "g_1m_0", "g_1m_1m", "g_1m_10m"]
-    for name in arr:
-        do_test(directory + name)
+    directory = "../../data_local/"
+    do_test(directory + "g_100k_5m")
+    # arr = ["g_100k_100k", "g_100k_1m", "g_100k_5m", "g_1m_0", "g_1m_1m", "g_1m_10m"]
+    # for name in arr:
+    #     do_test(directory + name)
