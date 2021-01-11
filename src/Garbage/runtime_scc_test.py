@@ -9,9 +9,9 @@ algo: GraphAlgo = None
 v = 100000
 e = v * 10
 
-path = "../../data/G_20000_160000_0.json"
 # path = "../../data/G_20000_160000_0.json"
-# path = "../../data/G_30000_240000_0.json"
+# path = "../../data/G_20000_160000_0.json"
+path = "../../data/G_30000_240000_0.json"
 save = e < 5000001
 
 
@@ -50,6 +50,7 @@ if __name__ == '__main__':
     t = time.time()
     # components = nx.connected_components(nx_graph)
     # nx.connected_components(nx_graph)
-    c = sorted(nx.strongly_connected_components(nx_graph), key=len, reverse=True)
+    list(nx.strongly_connected_components(nx_graph))
+    # c = sorted(nx.strongly_connected_components(nx_graph), key=len, reverse=True)
     print(time.time() - t)
     # print(c)

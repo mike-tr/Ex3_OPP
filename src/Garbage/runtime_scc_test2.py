@@ -7,7 +7,7 @@ from Tests.dummyGraph import graph_creator
 
 graph: DiGraph = None
 algo: GraphAlgo = None
-v = 20000
+v = 1000000
 e = v * 1
 
 path = "../../data/my_graph"
@@ -33,12 +33,12 @@ if __name__ == '__main__':
     t = time.time()
     test_create()
     print(algo.get_graph())
-    print(time.time() - t)
+    print("DiGraph load:", time.time() - t)
 
     t = time.time()
     algo.connected_components()
     # print(algo.connected_components())
-    print(time.time() - t)
+    print("DiGraph components:", time.time() - t)
 
     scc_components = []
     scc: list
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     t = time.time()
     nx_graph = load_networkx_graph(path)
     print(len(nx_graph.edges))
-    print(time.time() - t)
+    print("NetworkX load:", time.time() - t)
 
     # print(nx.shortest_path_length(nx_graph, 0, 100, 'weight'))
 
@@ -59,5 +59,5 @@ if __name__ == '__main__':
     # components = nx.connected_components(nx_graph)
     # nx.connected_components(nx_graph)
     c = sorted(nx.strongly_connected_components(nx_graph), key=len, reverse=True)
-    print(time.time() - t)
+    print("NetworkX components:", time.time() - t)
     # print(c)

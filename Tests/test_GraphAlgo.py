@@ -58,8 +58,11 @@ class TestGraphAlgo(Tester):
         graph.add_node(5)
         graph.add_node(6)
         graph.add_edge(1, 2, 3)
+        graph.remove_edge(1, 2)
         graph.add_edge(1, 2, 4)
+        graph.remove_edge(1, 2)
         graph.add_edge(1, 2, 3)
+        graph.remove_edge(1, 2)
         graph.add_edge(1, 2, 4)
 
         algo = GraphAlgo(graph)
@@ -184,6 +187,10 @@ class TestGraphAlgo(Tester):
             g.add_edge(i - 1, i, 10)
         algo = GraphAlgo(g)
         Tester.assertEqual(self, algo.shortest_path(0, 10)[0], 100)
+
+        g = graph_creator(100, 0)
+        algo = GraphAlgo(g)
+        print(g)
         for i in range(1, 100):
             g.add_edge(i - 1, i, 1)
         Tester.assertEqual(self, algo.shortest_path(0, 10)[0], 10)
@@ -218,6 +225,7 @@ class TestGraphAlgo(Tester):
         for i in range(len(path)):
             Tester.assertEqual(self, path[i], v1[1][i])
 
+        graph.remove_edge(4, 5)
         graph.add_edge(4, 5, 100)
         v1 = g.shortest_path(1, 5)
         Tester.assertEqual(self, 35, v1[0])
