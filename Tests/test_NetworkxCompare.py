@@ -11,7 +11,7 @@ import time
 
 class TestGraphAlgo(TestCase):
     def test_graph_nx(self):
-        file = "../data/G_30000_240000_0.json"
+        file = "../data/G_100_800_0.json"
         s = 0
         f = 9
         print(file)
@@ -29,10 +29,11 @@ class TestGraphAlgo(TestCase):
         print("Networkx scc time (list): ", time.time() - t)
         t = time.time()
         sorted(nx.strongly_connected_components(nx_graph), key=len, reverse=True)
-        print("Networkx scc time: ", time.time() - t)
+        # print("Networkx scc time: ", time.time() - t)
+        print(nx.node_connected_component(nx_graph, 0))
         t = time.time()
-        # print(graph_algo.connected_components())
-        graph_algo.connected_components()
+        print(graph_algo.connected_component(0))
+        # graph_algo.connected_components()
         print("DiGraph scc time: ", time.time() - t)
 
     def test_create_graph(self):

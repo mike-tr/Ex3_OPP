@@ -48,7 +48,7 @@ class TestDiGraph(TestCase):
         graph.add_edge(0, 10, 3)
         TestCase.assertEqual(self, 3, graph.e_size())
         graph.add_edge(0, 3, 2)
-        TestCase.assertEqual(self, 2, graph.get_edge(0, 3))
+        TestCase.assertEqual(self, 3, graph.get_edge(0, 3))
         TestCase.assertEqual(self, 3, graph.e_size())
 
     def test_remove_edge(self):
