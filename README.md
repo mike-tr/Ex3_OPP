@@ -40,3 +40,7 @@
 |G_20000_160000_0.json|20000|160000|0.279 sec|0.203 sec|
 |G_30000_240000_0.json|30000|240000|0.442 sec|0.332 sec|
 
+![paths](https://user-images.githubusercontent.com/48411662/104248823-ea5e8500-5472-11eb-8126-834eb18de1a3.jpg)
+![scc](https://user-images.githubusercontent.com/48411662/104248826-eb8fb200-5472-11eb-9ae7-02ba8fc56a4d.jpg)
+### java fails to load 1m - 10m Graph as it cannot read the json the "out of memory"
+![scc_single](https://user-images.githubusercontent.com/48411662/104248828-eb8fb200-5472-11eb-9ffd-f4f2f5c9dcb4.jpg)
