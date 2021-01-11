@@ -29,7 +29,12 @@ def test_create():
     algo.load_from_json(path)
 
 
-if __name__ == '__main__':
+def compare(nodes, edges, file):
+    global e, v, path
+    path = file
+    e = edges
+    v = nodes
+    print("-------------------------")
     t = time.time()
     test_create()
     print(algo.get_graph())
@@ -61,3 +66,13 @@ if __name__ == '__main__':
     c = sorted(nx.strongly_connected_components(nx_graph), key=len, reverse=True)
     print("NetworkX components:", time.time() - t)
     # print(c)
+
+
+if __name__ == '__main__':
+    ver = 100000
+    compare(ver, ver, "../../data_local/g_100k_100k")
+    compare(ver, ver * 10, "../../data_local/g_100k_1m")
+    compare(ver, ver * 50, "../../data_local/g_100k_5m")
+    compare(ver * 10, ver * 0, "../../data_local/g_1m_0")
+    compare(ver * 10, ver * 10, "../../data_local/g_1m_1m")
+    compare(ver * 10, ver * 100, "../../data_local/g_1m_10m")

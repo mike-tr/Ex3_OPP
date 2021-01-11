@@ -6,3 +6,4 @@ MyGraph
 data/my_graph
 data/Huge_graph.json
 data/huge_random_graph.json
+data_local/

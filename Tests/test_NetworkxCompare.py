@@ -30,7 +30,8 @@ class TestGraphAlgo(TestCase):
         t = time.time()
         sorted(nx.strongly_connected_components(nx_graph), key=len, reverse=True)
         # print("Networkx scc time: ", time.time() - t)
-        print(nx.node_connected_component(nx_graph, 0))
+
+        # print(nx.node_connected_component(nx_graph, 0))
         t = time.time()
         print(graph_algo.connected_component(0))
         # graph_algo.connected_components()

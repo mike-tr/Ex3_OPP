@@ -102,9 +102,13 @@ class GraphAlgo(GraphAlgoInterface):
         if node is None:
             return []
         scc: list
-        for scc in self.connected_components():
-            if scc.__contains__(id1):
-                return scc
+        if self._scc_update == self._graph.get_mc():
+            for scc in self._scc.components:
+                if scc.__contains__(id1):
+                    return scc
+        else:
+            return self._scc.calculate_scc_single(self._graph, id1)
+
         return []
 
     def connected_components(self) -> List[list]:

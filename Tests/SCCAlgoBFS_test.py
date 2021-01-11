@@ -6,6 +6,27 @@ from src.utilities.SCCAlgo import SCCAlgo
 
 # noinspection DuplicatedCode
 class TestSCCAlgoBFS(Tester):
+    def test_single(self):
+        v = 1000
+        graph = graph_creator(v, v * 2)
+        scc_bfs = SCCAlgoBFS()
+
+        scc_bfs.calculate_scc(graph)
+        component = scc_bfs.calculate_scc_single(graph, 0)
+
+        scc_components_dfs = []
+        size_dfs = 0
+        for scc in scc_bfs.components:
+            size_dfs += len(scc)
+            scc_components_dfs.append(sorted(scc))
+
+        component = sorted(component)
+
+        print(scc_components_dfs)
+        print(component)
+
+        Tester.assertTrue(self, scc_components_dfs.__contains__(component))
+
     def test_size(self):
         v = 1000
         graph = graph_creator(v, v * 2)

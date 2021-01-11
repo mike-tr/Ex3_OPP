@@ -34,7 +34,6 @@ class SCCAlgoBFS:
     def __init__(self):
         self._graph = None
         self._dag = []
-        self._component = []
         self.components = []
 
     def calculate_scc(self, graph: DiGraph) -> list:
@@ -49,6 +48,23 @@ class SCCAlgoBFS:
             _BfsNode.remove_fields(node)
         return self.components
 
+    def calculate_scc_single(self, graph: DiGraph, node_id: int):
+        if graph is not None:
+            self._graph = graph
+            node = graph.get_node(node_id)
+            if node is not None:
+                for current_id in self._graph.get_all_v():
+                    current = self._graph.get_node(current_id)
+                    _BfsNode.add_fields(current, None)
+
+                scc_component = self._bfs_visit(node)
+                for current_id in self._graph.get_all_v():
+                    current = self._graph.get_node(current_id)
+                    _BfsNode.remove_fields(current)
+
+                return scc_component
+        return []
+
     def _bfs_forward(self):
         for node_id in self._graph.get_all_v():
             node = self._graph.get_node(node_id)
@@ -58,12 +74,12 @@ class SCCAlgoBFS:
         for node_id in self._graph.get_all_v():
             node: _BfsNode = self._graph.get_node(node_id)
             if node.bfs_index is NO_SCC:
-                self._bfs_visit(node)
-                self.components.append(self._component)
+                scc_component = self._bfs_visit(node)
+                self.components.append(scc_component)
 
     def _bfs_visit(self, node: _BfsNode):
         # print("----------", node.get_key(), "-------------")
-        self._component = []
+        scc_component = []
         node.bfs_index = node.get_key()
         node.bfs_color = BLACK
 
@@ -87,7 +103,7 @@ class SCCAlgoBFS:
         while stack:
             current: _BfsNode = stack.pop()
 
-            self._component.append(current.get_key())
+            scc_component.append(current.get_key())
             current.bfs_index = node.bfs_index
 
             for neighbour_id in self._graph.all_in_edges_of_node(current.get_key()).keys():
@@ -99,3 +115,4 @@ class SCCAlgoBFS:
         while stack2:
             forget: _BfsNode = stack2.pop()
             forget.bfs_color = WHITE
+        return scc_component
