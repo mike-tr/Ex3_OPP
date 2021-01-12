@@ -46,3 +46,8 @@
 ![scc](https://user-images.githubusercontent.com/48411662/104248826-eb8fb200-5472-11eb-9ae7-02ba8fc56a4d.jpg)
 ### java fails to load 1m - 10m Graph as it cannot read the json the "out of memory"
 ![scc_single](https://user-images.githubusercontent.com/48411662/104248828-eb8fb200-5472-11eb-9ffd-f4f2f5c9dcb4.jpg)
+
+![Shortest_path](https://user-images.githubusercontent.com/74137570/104340787-ba11f780-5501-11eb-8678-ca6c6f430896.png)
+![Sccs](https://user-images.githubusercontent.com/74137570/104340831-c302c900-5501-11eb-97f4-a702f404a71c.png)
+![Scc](https://user-images.githubusercontent.com/74137570/104340851-cb5b0400-5501-11eb-8aaa-9950bf0c8106.png)
+
