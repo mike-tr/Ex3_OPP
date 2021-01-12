@@ -8,6 +8,11 @@ import random
 class TestDiGraph(TestCase):
     graph: DiGraph = None
 
+    def test_invalid_node(self):
+        graph = graph_creator(10, 0)
+        TestCase.assertEqual(self, {}, graph.all_in_edges_of_node(11))
+        TestCase.assertEqual(self, False, graph.add_edge(0, 11, 2))
+
     def test_runtime(self):
         v = 100000
         e = v * 5

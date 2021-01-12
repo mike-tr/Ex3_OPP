@@ -86,10 +86,14 @@ class DiGraph(GraphInterface):
         return self._Nodes
 
     def all_in_edges_of_node(self, id1: int) -> dict:
-        return self._Backward_Edges[id1]
+        if id in self._Nodes:
+            return self._Backward_Edges[id1]
+        return {}
 
     def all_out_edges_of_node(self, id1: int) -> dict:
-        return self._Edges[id1]
+        if id in self._Nodes:
+            return self._Edges[id1]
+        return {}
 
     def __str__(self):
         return "DiGraph: { " + "Node size: " + str(len(self._Nodes)) + ", Edge size: " + str(
