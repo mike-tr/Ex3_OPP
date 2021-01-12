@@ -100,7 +100,7 @@ def do_test(file):
 
     t = time.time()
     for i in range(tries):
-        c = g.connected_components()
+        c = g.recalculate_connected_components()
     end_time = time.time() - t
     print("python number of components:", len(c))
     print("python components avg compute time:", end_time / tries)

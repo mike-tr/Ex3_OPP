@@ -119,6 +119,10 @@ class GraphAlgo(GraphAlgoInterface):
         self._scc_update = self._graph.get_mc()
         return self._scc.components
 
+    def recalculate_connected_components(self):
+        self._scc.calculate_scc(self._graph)
+        return self._scc.components
+
     def plot_graph(self) -> None:
         plot_graph(self._graph)
 
