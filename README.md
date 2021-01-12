@@ -40,6 +40,8 @@
 |G_20000_160000_0.json|20000|160000|0.279 sec|0.203 sec|
 |G_30000_240000_0.json|30000|240000|0.442 sec|0.332 sec|
 
+![Python_vs_networkx_spd](https://user-images.githubusercontent.com/74137570/104298208-60430a80-54cc-11eb-84f5-ff0a290f0199.png)
+![Python_vs_networkx_scc](https://user-images.githubusercontent.com/74137570/104298154-53261b80-54cc-11eb-9f8f-a481e95b33d1.png)
 ![paths](https://user-images.githubusercontent.com/48411662/104248823-ea5e8500-5472-11eb-8126-834eb18de1a3.jpg)
 ![scc](https://user-images.githubusercontent.com/48411662/104248826-eb8fb200-5472-11eb-9ae7-02ba8fc56a4d.jpg)
 ### java fails to load 1m - 10m Graph as it cannot read the json the "out of memory"
