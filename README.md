@@ -17,6 +17,8 @@ the graph strong connected components
 
 - Comparing the graph performance vs NetworkX library and The java implementation from Ex2, look for performance overview tab to see more.
 
+##### see more in wiki
+
 
 ### here is some of the graph's we can show
 
