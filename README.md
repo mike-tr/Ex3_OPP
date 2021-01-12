@@ -8,7 +8,7 @@ the graph strong connected components
 
 - In the next step we were suppose to compare our implementation performance vs NetworkX and Java implementation  
 
-- you can see the results in the sections on this wiki
+- you can see the results in the sections on this [wiki](https://github.com/miko-t/Ex3_OPP/wiki/Comparison-between-the-implementations)
 
 ## Overview
 - We implement the interface **GraphAlgoInterface.py** and **GraphInterface.py**, as the files **GraphAlgo.py** and **DiGraph.py**
@@ -17,7 +17,7 @@ the graph strong connected components
 
 - Comparing the graph performance vs NetworkX library and The java implementation from Ex2, look for performance overview tab to see more.
 
-##### see more in wiki
+##### see more in [wiki](https://github.com/miko-t/Ex3_OPP/wiki/Overview)
 
 
 ### here is some of the graph's we can show
@@ -30,6 +30,5 @@ the graph strong connected components
 
 #### some random graph
 ![p3](https://user-images.githubusercontent.com/48411662/104340557-7ae3a680-5501-11eb-82e4-ab4987211815.png)
-
 
 ##### **Project contributors**: Michael trushkin, Andrey Bakhrakh
