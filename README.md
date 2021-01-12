@@ -10,6 +10,8 @@ the graph strong connected components
 
 - you can see the results in the sections on this [wiki](https://github.com/miko-t/Ex3_OPP/wiki/Comparison-between-the-implementations)
 
+- Learn how to use our graph here [wiki](https://github.com/miko-t/Ex3_OPP/wiki/How-to-use)
+
 ## Overview
 - We implement the interface **GraphAlgoInterface.py** and **GraphInterface.py**, as the files **GraphAlgo.py** and **DiGraph.py**
 
