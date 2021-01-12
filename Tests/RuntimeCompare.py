@@ -6,11 +6,6 @@ from src.utilities.Jsonconverter import load_networkx_graph
 
 graph: DiGraph = None
 algo: GraphAlgo = None
-v = 100000
-e = v * 10
-
-path = "../../MyGraph"
-save = e < 5000001
 
 tries = 25
 
@@ -118,10 +113,10 @@ def do_test(file):
 
 
 if __name__ == '__main__':
-    directory = "../../data_local/"
+    directory = "../data_local/"
     # do_test(directory + "g_100k_5m")
     # arr = ["g_100k_100k", "g_100k_1m", "g_100k_5m", "g_1m_0", "g_1m_1m", "g_1m_10m"]
-    directory = "../../data/"
+    directory = "../data/"
     arr = ["G_10_80_0.json", "G_100_800_0.json", "G_1000_8000_0.json", "G_10000_80000_0.json",
            "G_20000_160000_0.json", "G_30000_240000_0.json"]
     for name in arr:
