@@ -5,7 +5,7 @@ from src.utilities.DrawerUtil import create_default_positions
 from src.utilities.Vector3 import Vector3
 
 
-def plot_graph(graph: DiGraph):
+def plot_graph(graph: DiGraph, file: str = None):
     bounds = create_default_positions(graph)
     scale: Vector3 = bounds[1] - bounds[0]
 
@@ -37,4 +37,10 @@ def plot_graph(graph: DiGraph):
         # ax.add_artist(plt.Circle(xy=pos.to_tuple2d(), radius=scale.x * 0.01))
         ax.text(pos.x + scale.x * 0.02, pos.y + scale.y * 0.03, str(node.get_key()))
     ax.set_aspect('equal', adjustable='datalim')
+    ymin, ymax = ax.get_ylim()
+    ax.set_ylim(top=ymax + (ymax - ymin) * 0.05)
+    # ax.set_ylim(top=bounds[1].y)
+    fig.tight_layout()
+    if file:
+        plt.savefig("../data_local/" + file)
     plt.show()

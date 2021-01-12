@@ -126,6 +126,9 @@ class GraphAlgo(GraphAlgoInterface):
     def plot_graph(self) -> None:
         plot_graph(self._graph)
 
+    def plot_and_save(self, file) -> None:
+        plot_graph(self._graph, file)
+
     def save_to_json(self, file_name: str) -> bool:
         """ saves the graph into the specified file
             :returns True on success, False if failed"""
