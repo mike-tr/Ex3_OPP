@@ -54,7 +54,7 @@ def do_test(file):
     end_time = time.time() - t
     print("python avg dist:", avg_dist / tries)
     print("python run:", tries, ",number of times path not found:", fail)
-    print("python avg path time:", end_time / tries)
+    print("python avg path compute time:", end_time / tries)
 
     print("\n- nx -")
 
@@ -78,7 +78,7 @@ def do_test(file):
     end_time = time.time() - t
     print("NetworkX avg dist:", avg_dist / tries)
     print("NetworkX run:", tries, ",number of times path not found:", fail)
-    print("NetworkX avg path time:", end_time / tries)
+    print("NetworkX avg path compute time:", end_time / tries)
 
     print("- - - - - - - - - - -")
     print("compute single component time:")
@@ -92,25 +92,29 @@ def do_test(file):
     end_time = time.time() - t
     print("python avg single component length:", avg_len / tries)
     # print(g.connected_component(0))
-    print("python avg single component time:", end_time / tries)
+    print("python avg single component compute time:", end_time / tries)
 
     print("- - - - - - - - - - -")
     print("compute components time:")
     print("- python -")
 
     t = time.time()
-    c = len(g.connected_components())
-    print("python number of components:", c)
-    print("python components:", time.time() - t)
+    for i in range(tries):
+        c = g.connected_components()
+    end_time = time.time() - t
+    print("python number of components:", len(c))
+    print("python components avg compute time:", end_time / tries)
 
     print("\n- nx -")
 
     t = time.time()
     # components = nx.connected_components(nx_graph)
     # nx.connected_components(nx_graph)
-    c = sorted(nx.strongly_connected_components(nx_graph), key=len, reverse=True)
+    for i in range(tries):
+        c = sorted(nx.strongly_connected_components(nx_graph), key=len, reverse=True)
+    end_time = time.time() - t
     print("NetworkX number of components:", len(c))
-    print("NetworkX components:", time.time() - t)
+    print("NetworkX components avg compute time:", end_time / tries)
 
 
 if __name__ == '__main__':
