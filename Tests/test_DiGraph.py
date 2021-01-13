@@ -12,6 +12,14 @@ class TestDiGraph(TestCase):
         graph = graph_creator(10, 0)
         TestCase.assertEqual(self, {}, graph.all_in_edges_of_node(11))
         TestCase.assertEqual(self, False, graph.add_edge(0, 11, 2))
+        graph.add_edge(1, 2, -3)
+        TestCase.assertEqual(self, -1, graph.get_edge(1, 2))
+        TestCase.assertEqual(self, {}, graph.all_in_edges_of_node(2))
+        TestCase.assertEqual(self, 0, len(graph.all_out_edges_of_node(1)))
+        graph.add_edge(1, 2, 2)
+        TestCase.assertEqual(self, 2, graph.get_edge(1, 2))
+        TestCase.assertEqual(self, 1, len(graph.all_in_edges_of_node(2)))
+        TestCase.assertEqual(self, 1, len(graph.all_out_edges_of_node(1)))
 
     def test_runtime(self):
         v = 100000
