@@ -188,3 +188,24 @@ class TestDiGraph(TestCase):
         for i in range(1, 10):
             self.assertEqual({}, graph.all_in_edges_of_node(i))
 
+    def test_MC(self):
+        graph = DiGraph()
+        for i in range(10):
+            graph.add_node(i)
+        self.assertEqual(10, graph.get_mc())
+        graph.add_edge(1, 2, 3)
+        self.assertEqual(11, graph.get_mc())
+        graph.add_edge(1, 2, 3)
+        self.assertEqual(11, graph.get_mc())
+        graph.add_edge(1, -1, 3)
+        self.assertEqual(11, graph.get_mc())
+        graph.remove_edge(1, 2)
+        self.assertEqual(12, graph.get_mc())
+        graph.add_edge(1, 2, 3)
+        graph.add_edge(1, 3, 3)
+        graph.add_edge(1, 4, 3)
+        self.assertEqual(15, graph.get_mc())
+        graph.remove_node(1)
+        self.assertEqual(19, graph.get_mc())
+        graph.remove_node(-1)
+        self.assertEqual(19, graph.get_mc())
