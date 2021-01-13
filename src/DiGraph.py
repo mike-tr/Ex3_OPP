@@ -67,10 +67,10 @@ class DiGraph(GraphInterface):
             self._edge_size -= 1
             self._MC += 1
         self._edge_size -= len(self._Edges[node_id])
+        self._MC += 1 + len(self._Edges[node_id])
         self._Edges.pop(node_id)
         self._Backward_Edges.pop(node_id)
         self._Nodes.pop(node_id)
-        self._MC += 1
         return True
 
     def remove_edge(self, node_id1: int, node_id2: int) -> bool:
@@ -86,12 +86,12 @@ class DiGraph(GraphInterface):
         return self._Nodes
 
     def all_in_edges_of_node(self, id1: int) -> dict:
-        if id in self._Nodes:
+        if id1 in self._Nodes:
             return self._Backward_Edges[id1]
         return {}
 
     def all_out_edges_of_node(self, id1: int) -> dict:
-        if id in self._Nodes:
+        if id1 in self._Nodes:
             return self._Edges[id1]
         return {}
 

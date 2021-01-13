@@ -13,6 +13,9 @@ class NodeData:
     def get_key(self) -> int:
         return self._key
 
+    def get_pos(self):
+        return self.pos
+
     def get_draw_pos(self) -> Vector3:
         if self.pos is None:
             return self.default_pos
