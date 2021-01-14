@@ -8,7 +8,7 @@ the graph strong connected components
 
 - In the next step we were suppose to compare our implementation performance vs NetworkX and Java implementation  
 
-- you can see the results in the sections on this [wiki](https://github.com/miko-t/Ex3_OPP/wiki/Comparison-between-the-implementations)
+- you can see the results in the sections on this [wiki](https://github.com/miko-t/Ex3_OPP/wiki/Performance-on-given-Graph's)
 
 - Learn how to use our graph here [wiki](https://github.com/miko-t/Ex3_OPP/wiki/How-to-use)
 
