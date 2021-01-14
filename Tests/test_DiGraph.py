@@ -214,6 +214,6 @@ class TestDiGraph(TestCase):
         graph.add_edge(1, 4, 3)
         self.assertEqual(15, graph.get_mc())
         graph.remove_node(1)
-        self.assertEqual(19, graph.get_mc())
+        self.assertEqual(16, graph.get_mc())
         graph.remove_node(-1)
-        self.assertEqual(19, graph.get_mc())
+        self.assertEqual(16, graph.get_mc())
